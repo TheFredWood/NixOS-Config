@@ -16,7 +16,6 @@
 
   environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
-  programs.zsh.enable = true;
   networking.hostName = "nixos"; # Define your hostname.
 
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -51,7 +50,8 @@
 
   # Enable the KDE Plasma Desktop Environment.
   services.xserver.displayManager.sddm.enable = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  # services.xserver.desktopManager.plasma5.enable = true;
+  services.xserver.windowManager.awesome.enable = true;
 
   # Configure keymap in X11
   services.xserver = {
@@ -108,12 +108,22 @@
     git
     stow
     gcc
-    oh-my-zsh
+    # oh-my-zsh
     tmux
     awesome
     alacritty
   ];
 
+  programs.zsh = {
+    enable = true;
+    autosuggestions.enable = true;
+    syntaxHighlighting.enable = true;
+    ohMyZsh = {
+      enable = true;
+      theme = "robbyrussell";
+
+    };
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

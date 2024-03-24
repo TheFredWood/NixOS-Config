@@ -67,14 +67,6 @@
     # EDITOR = "emacs";
   };
 
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      ll = "ls -l";
-      ".." = "cd ..";
-    };
-  };
-
   programs.git = {
     enable = true;
     userName = "Frederik"; 
