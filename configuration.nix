@@ -92,6 +92,7 @@
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       firefox
+      onedrive
     ];
   };
 
@@ -105,6 +106,12 @@
     neovim
   #  wget
     git
+    stow
+    gcc
+    oh-my-zsh
+    tmux
+    awesome
+    alacritty
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

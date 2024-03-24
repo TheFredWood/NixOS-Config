@@ -84,7 +84,8 @@
     }; 
   };
 
-  home.file.".config/nvim/kicksstart.lua".source = ./kickstart.nvim;
+  # xdg.configFile.nvim.source = ./kickstart.nvim;
+
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
