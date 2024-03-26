@@ -112,6 +112,7 @@
     tmux
     awesome
     alacritty
+    fzf
   ];
 
   programs.zsh = {
