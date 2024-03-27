@@ -41,6 +41,7 @@
   # plain files is through 'home.file'.
   home.file = {
     ".config/awesome/rc.lua".source = ./rc.lua;
+    ".config/awesome/theme.lua".source = ./theme.lua;
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
     # # the Nix store. Activating the configuration will then make '~/.screenrc' a
     # # symlink to the Nix store copy.
