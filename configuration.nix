@@ -93,6 +93,7 @@
     packages = with pkgs; [
       firefox
       onedrive
+      spotify
     ];
   };
 
