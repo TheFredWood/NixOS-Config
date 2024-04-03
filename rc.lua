@@ -17,7 +17,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
-
+local net_widgets = require("net_widgets")
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -52,6 +52,8 @@ terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
 
+
+net_wireless = net_widgets.wireless({interface="wlp1s0"})
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -106,6 +108,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
+
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
@@ -169,7 +172,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -195,6 +198,7 @@ awful.screen.connect_for_each_screen(function(s)
         buttons = tasklist_buttons
     }
 
+
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
@@ -211,6 +215,7 @@ awful.screen.connect_for_each_screen(function(s)
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
+            net_wireless,
             wibox.widget.systray(),
             mytextclock,
             s.mylayoutbox,
@@ -231,25 +236,16 @@ root.buttons(gears.table.join(
 globalkeys = gears.table.join(
     awful.key({ modkey,           }, "s",      hotkeys_popup.show_help,
               {description="show help", group="awesome"}),
-    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
-              {description = "view previous", group = "tag"}),
-    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
-              {description = "view next", group = "tag"}),
+--    awful.key({ modkey,           }, "Left",   awful.tag.viewprev,
+--              {description = "view previous", group = "tag"}),
+--    awful.key({ modkey,           }, "Right",  awful.tag.viewnext,
+--              {description = "view next", group = "tag"}),
     awful.key({ modkey,           }, "Escape", awful.tag.history.restore,
               {description = "go back", group = "tag"}),
-
-    awful.key({ modkey,           }, "j",
-        function ()
-            awful.client.focus.byidx( 1)
-        end,
-        {description = "focus next by index", group = "client"}
-    ),
-    awful.key({ modkey,           }, "k",
-        function ()
-            awful.client.focus.byidx(-1)
-        end,
-        {description = "focus previous by index", group = "client"}
-    ),
+    awful.key({ modkey,           }, "j", function () awful.client.focus.byidx( 1) end,
+        {description = "focus next by index", group = "client"}),
+    awful.key({ modkey,           }, "k", function () awful.client.focus.byidx(-1) end,
+        {description = "focus previous by index", group = "client"}),
     awful.key({ modkey,           }, "w", function () mymainmenu:show() end,
               {description = "show main menu", group = "awesome"}),
 
@@ -315,6 +311,7 @@ globalkeys = gears.table.join(
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
+
               function ()
                   awful.prompt.run {
                     prompt       = "Run Lua code: ",
@@ -486,17 +483,20 @@ awful.rules.rules = {
           "ConfigManager",  -- Thunderbird's about:config.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }},
+      }, properties = { floating = true }
+    },
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
-    -- Set Firefox to always map on the tag named "2" on screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { screen = 1, tag = "2" } },
+    --Set Firefox to always map on the tag named "2" on screen 1.
+    { rule = { class = "Firefox" },
+        properties = { screen = 1, tag = "2" } },
+
 }
+
 -- }}}
 
 -- {{{ Signals

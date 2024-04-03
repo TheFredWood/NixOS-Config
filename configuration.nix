@@ -94,6 +94,7 @@
       firefox
       onedrive
       spotify
+      discord
     ];
   };
 
@@ -105,15 +106,21 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     neovim
-  #  wget
     git
     stow
     gcc
-    # oh-my-zsh
     tmux
     awesome
     alacritty
     fzf
+    eza
+    zoxide
+    ripgrep
+    tldr
+    xfce.thunar
+    iw
+    networkmanagerapplet
+#    luajitPackages.vicious
   ];
 
   programs.zsh = {
