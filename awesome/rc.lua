@@ -17,6 +17,7 @@ local hotkeys_popup = require("awful.hotkeys_popup")
 -- Enable hotkeys help widget for VIM and other apps
 -- when client with a matching name is opened:
 require("awful.hotkeys_popup.keys")
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -44,13 +45,12 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/home/frederik/.dotfiles/theme.lua")
+beautiful.init("/home/frederik/.config/awesome/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
 editor = os.getenv("EDITOR") or "nvim"
 editor_cmd = terminal .. " -e " .. editor
-
 
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
@@ -106,7 +106,6 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
-
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
@@ -195,7 +194,6 @@ awful.screen.connect_for_each_screen(function(s)
         filter  = awful.widget.tasklist.filter.currenttags,
         buttons = tasklist_buttons
     }
-
 
     -- Create the wibox
     s.mywibox = awful.wibar({ position = "top", screen = s })
@@ -308,7 +306,6 @@ globalkeys = gears.table.join(
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
-
               function ()
                   awful.prompt.run {
                     prompt       = "Run Lua code: ",
@@ -480,8 +477,7 @@ awful.rules.rules = {
           "ConfigManager",  -- Thunderbird's about:config.
           "pop-up",       -- e.g. Google Chrome's (detached) Developer Tools.
         }
-      }, properties = { floating = true }
-    },
+      }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
@@ -491,9 +487,7 @@ awful.rules.rules = {
     --Set Firefox to always map on the tag named "2" on screen 1.
     { rule = { class = "Firefox" },
         properties = { screen = 1, tag = "2" } },
-
 }
-
 -- }}}
 
 -- {{{ Signals
